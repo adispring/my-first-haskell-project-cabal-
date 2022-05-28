@@ -21,3 +21,9 @@ instance (Bifunctor bf, Functor fu, Functor gu) =>
 type Perhaps a b = BiComp Either (Const ()) Identity a b
 
 biCompProduct = BiComp ((,) (Just 'a') (Just 1))
+
+biCompSumLeft:: BiComp Either Maybe Maybe Char Int
+biCompSumLeft = BiComp(Left (Just 'a'))
+
+biCompSumRight:: BiComp Either Maybe Maybe Char Int
+biCompSumRight = BiComp(Right (Just 1))

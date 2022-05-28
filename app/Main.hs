@@ -13,5 +13,12 @@ main = do
   print (bimap (+1) (+1) (1, 3))
   print (bimap toUpper (+1) ('j', 3))
   print (bimap toUpper (+1) biCompProduct)
+  print (first toUpper biCompSumLeft)
+  print (second (+1) biCompSumLeft)
+  print (bimap toUpper (+1) biCompSumLeft)
+  print (first toUpper biCompSumRight)
+  print (second (+1) biCompSumRight)
+  print (bimap toUpper (+1) biCompSumRight)
+  -- print (bimap toUpper (+1) biCompSumRight)
 
 
