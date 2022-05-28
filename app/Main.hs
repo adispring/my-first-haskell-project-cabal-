@@ -1,4 +1,8 @@
 module Main where
 
+import Data.Time.LocalTime
+
 main :: IO ()
-main = putStrLn "Hello, Haskell!"
+main = do
+  now <- getZonedTime
+  print now
