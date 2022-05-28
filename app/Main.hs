@@ -3,6 +3,10 @@ module Main where
 import Data.Time.LocalTime
 import Data.Bifunctor
 import Data.Char
+import Data.Functor
+import Data.Functor.Identity  (Identity(..))
+import Control.Applicative    (Const(..))
+import Text.Show.Functions
 
 -- class Bifunctor f where
 --     bimap :: (a -> c) -> (b -> d) -> f a b -> f c d
@@ -12,11 +16,15 @@ import Data.Char
 --     second :: (b -> d) -> f a b -> f a d
 --     second = bimap id
 
--- newtype BiComp bf fu gu a b = BiComp (bf (fu a) (gu b))
+newtype BiComp bf fu gu a b = BiComp (bf (fu a) (gu b)) deriving Show
 
--- instance (Bifunctor bf, Functor fu, Functor gu) =>
---   Bifunctor (BiComp bf fu gu) where
---     bimap f1 f2 (BiComp x) = BiComp (bimap (fmap f1) (fmap f2) x)
+instance (Bifunctor bf, Functor fu, Functor gu) =>
+  Bifunctor (BiComp bf fu gu) where
+    bimap f1 f2 (BiComp x) = BiComp (bimap (fmap f1) (fmap f2) x)
+
+type Perhaps a b = BiComp Either (Const ()) Identity a b
+
+a = BiComp ((,) (Just 'a') (Just 1))
 
 main :: IO ()
 main = do
@@ -25,5 +33,6 @@ main = do
   print (second (+1) ('j', 3))
   print (bimap (+1) (+1) (1, 3))
   print (bimap toUpper (+1) ('j', 3))
+  print (bimap toUpper (+1) a)
 
 
