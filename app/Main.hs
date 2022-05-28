@@ -18,7 +18,7 @@ main = do
   print (bimap toUpper (+1) biCompSumLeft)
   print (first toUpper biCompSumRight)
   print (second (+1) biCompSumRight)
-  print (bimap toUpper (+1) biCompSumRight)
+  -- print (bimap toUpper (+1) biCompSumRight)
   -- print (bimap toUpper (+1) biCompSumRight)
 
 
